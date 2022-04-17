@@ -1,26 +1,28 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './AppGames.module.css'
 import styles from './../../../App.module.css'
+import Store from './../../../context';
 
-const WriteIt = ({playWords, wordIndex, setWordIndex, progressBarWidth, correctWords, setCorrectWords, errorWords, setErrorWords, points, speak}) => {
+const WriteIt = ({wordIndex, setWordIndex, progressBarWidth, points, speak}) => {
 
+    const data = useContext(Store)
     const input = useRef();
-    const[randomWords, setRandomWords ] = useState(playWords.sort(() => Math.random() - 0.5))
+    const[randomWords, setRandomWords ] = useState(data.playWords.sort(() => Math.random() - 0.5))
     
     const checkWord = (event) => {
         event.preventDefault()
         if(input.current.value === randomWords[wordIndex].translate) {
             speak(randomWords[wordIndex].translate)
-            setCorrectWords(correctWords + 1)
-            if(wordIndex !== playWords.length -1 ){
+            data.setCorrectWords(data.correctWords + 1)
+            if(wordIndex !== data.playWords.length -1 ){
                 setWordIndex(wordIndex + 1)
             }else {
                 alert('Game is over')
             }
             input.current.value =''
         }else {
-            setErrorWords(errorWords + 1)
+            data.setErrorWords(data.errorWords + 1)
         }
     }
 
@@ -32,8 +34,8 @@ const WriteIt = ({playWords, wordIndex, setWordIndex, progressBarWidth, correctW
         <nav className={styles.gameNav}>
             <Link to={'/games' } className={styles.btnBack}/>
             <ul className={styles.results}>
-                <li>Errors: {errorWords}</li>
-                <li>Correct: {correctWords}</li>
+                <li>Errors: {data.errorWords}</li>
+                <li>Correct: {data.correctWords}</li>
                 <li>Points: {points}</li>
             </ul>
         </nav>

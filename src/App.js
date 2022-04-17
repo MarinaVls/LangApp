@@ -50,16 +50,9 @@ function App() {
           <Route path='/dashboard' element={<Dashboard  points = {points}/>} />
           <Route path='/library' element={<Library library={library} setLibrary={setLibrary}/>} />
           <Route path='/games' element={<Games />} />
-          <Route path='/games/game/write-it' element={<WriteIt playWords={playWords} 
-          wordIndex = {wordIndex} setWordIndex={setWordIndex}
-          correctWords = {correctWords} setCorrectWords = {setCorrectWords}
-          errorWords = {errorWords} setErrorWords = {setErrorWords}
-          points = {points} speak = {speak}
-          progressBarWidth={progressBarWidth} />} />
-          <Route path='/games/game/check-it' element={<CheckIt  
-          wordIndex = {wordIndex} setWordIndex={setWordIndex}
-          points = {points} speak = {speak}
-          progressBarWidth = {progressBarWidth} />} />
+          <Route path='/games/game/write-it' element={<WriteIt wordIndex = {wordIndex} setWordIndex={setWordIndex} points = {points} 
+          speak = {speak} progressBarWidth={progressBarWidth} />} />
+          <Route path='/games/game/check-it' element={<CheckIt wordIndex = {wordIndex} setWordIndex={setWordIndex} points = {points} speak = {speak} progressBarWidth = {progressBarWidth} />} />
           <Route path='/learn' element={<Learn speak = {speak} library={library} wordIndex = {wordIndex} setWordIndex={setWordIndex} progressBarWidth={progressBarWidth}/>}/>
         </Routes>
       </Store.Provider>
